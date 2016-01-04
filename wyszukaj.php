@@ -49,11 +49,10 @@
 $query = 'SELECT id, nazwa FROM produkty ORDER BY nazwa';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
-while ($line = pg_fetch_array($result, PGSQL_ASSOC)) {
+while ($line = pg_fetch_row($result)) {
    
-        echo "<option value= " . $line['id'] . " > " . $line['nazwa'] . "</option>"; 
+        echo "<option value= " . $line[0] . " > " . $line[1] . "</option>\n"; 
         //echo "\t\t<td>$col_value</td>\n";
-    
 
 }
 
@@ -69,6 +68,13 @@ while ($line = pg_fetch_array($result, PGSQL_ASSOC)) {
 #        }
 #        echo'</center>';
 #}
+
+
+// Zwolnienie zasobów wyniku zapytania
+pg_free_result($result);
+
+// Zamknięcie połączenia
+pg_close($dbconn)
 ?>
 
 

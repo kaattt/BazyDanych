@@ -37,12 +37,33 @@
 
 <select name="skladniki" size="10" multiple="multiple">
 
-<?php
 
-$id = 2 ;
-$nazwa = marchewka ;
 
-echo "<option value= " . $id . " > " . $nazwa . "</option>"; 
+<?php //connection
+
+        $con='host=localhost dbname=przepisy user=kasia password=tajne';
+        $db=pg_connect($con) or die('Nie mozna nawiazac polaczenia: ' . pg_last_error());
+
+       if($db)
+         echo "Polaczono ...<br/>";
+       else
+         echo "Nie mozna sie polaczyc<br/>";
+
+$query = 'SELECT id, nazwa FROM produkty ORDER BY nazwa';
+$result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
+
+while ($line = pg_fetch_row($result)) {
+   
+        echo "<option value= " . $line[0] . " > " . $line[1] . "</option>\n"; 
+      
+
+}
+
+// Zwolnienie zasobów wyniku zapytania
+pg_free_result($result);
+
+// Zamknięcie połączenia
+pg_close($dbconn)
 
 ?>
 

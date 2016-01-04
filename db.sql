@@ -52,6 +52,3 @@ CREATE TABLE historia(
 			data timestamp
 			);
 
-
-
-INSERT INTO produkty (nazwa) VALUES ('');

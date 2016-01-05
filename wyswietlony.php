@@ -22,12 +22,16 @@
 
 $query = 'SELECT nazwa FROM przepisy';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
+//$result = 0;
 
-while ($line = pg_fetch_row($result)) {
+if(!$result or pg_num_rows($result)==0){
+        echo "<input type=\"text\" name=\"przepis\" size=\"50\" value= \" Brak przepisu \" readonly=\"readonly\"/>";
+} else {
+
+    while ($line = pg_fetch_row($result)) {
    
         echo "<input type=\"text\" name=\"przepis\" size=\"50\" value= \"" . $line[0] .  "\" readonly=\"readonly\"/>";
-      
-
+      }    
 }
 
 // Zwolnienie zasobów wyniku zapytania
@@ -59,11 +63,15 @@ pg_close($dbconn)
 
 $query = 'SELECT przepis FROM przepisy';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
+//$result = 0;
 
-while ($line = pg_fetch_row($result)) {
+if(!$result or pg_num_rows($result)==0){
+        echo " <textarea name=\"tresc\" cols=\"100\" rows=\"20\" readonly=\"readonly\"> Brak przepisu </textarea> ";
+} else {
+      while ($line = pg_fetch_row($result)) {
 
       	echo " <textarea name=\"tresc\" cols=\"100\" rows=\"20\" readonly=\"readonly\">" . $line[0] . "</textarea> ";
-
+          }
 }
 
 // Zwolnienie zasobów wyniku zapytania
@@ -94,11 +102,17 @@ pg_close($dbconn)
 
 $query = 'SELECT nazwa FROM uzytkownicy';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
+//$result = 0;
 
-while ($line = pg_fetch_row($result)) {
+if(!$result or pg_num_rows($result)==0){
+        echo "<input type=\"text\" name=\"przepis\" size=\"25\" readonly=\"readonly\"/>";
+} else {
+
+    while ($line = pg_fetch_row($result)) {
    
-        echo "<input type=\"text\" name=\"uzytkownik\" size=\"25\" value= \"" . $line[0] .  "\" readonly=\"readonly\"/>";
-    }
+        echo "<input type=\"text\" name=\"przepis\" size=\"25\" value= \"" . $line[0] .  "\" readonly=\"readonly\"/>";
+      }
+}
 
 // Zwolnienie zasobów wyniku zapytania
 pg_free_result($result);
@@ -111,12 +125,11 @@ pg_close($dbconn)
 </form>
 
 
+<a href='edytuj.php'>Kliknij, aby edytować</a></br>
 
-<a href = 'edytuj.php'>Kliknij, aby edytować</a></br>
+<a href='historia.php'>Kliknij, aby zobaczyć historię zmian tego przepisu</a></br>
 
-<a href = 'historia.php'>Kliknij, aby zobaczyć historię zmian tego przepisu</a></br>
-
-<a href = 'wyszukaj.php'>Wróć</a>
+<a href='wyszukaj.php'>Wróć</a>
 
 </fieldset>
 </body></html>

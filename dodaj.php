@@ -71,7 +71,10 @@ pg_close($dbconn)
 
 </form>
 
-<input type="submit" onclick="alert('Dziękujemy za dodanie przepisu!')" ></br>
+
+<form action="wyswietlony.php">
+	<input type="submit" onclick="alert('Dziękujemy za dodanie przepisu!')" ></br>
+</form>
 
 <a href = 'index.html'>Wróć</a>
 

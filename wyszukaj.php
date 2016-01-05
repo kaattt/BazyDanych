@@ -56,8 +56,6 @@ while ($line = pg_fetch_row($result)) {
 
 }
 
-
-
 #$dostepne_film = pg_query($db,'SELECT  FROM film ORDER BY tytul ;');
 #if(!$dostepne_film or pg_num_rows($dostepne_film)==0){
 #        echo 'Brak filmów';
@@ -69,16 +67,12 @@ while ($line = pg_fetch_row($result)) {
 #        echo'</center>';
 #}
 
-
 // Zwolnienie zasobów wyniku zapytania
 pg_free_result($result);
 
 // Zamknięcie połączenia
 pg_close($dbconn)
 ?>
-
-
-
 
 </select>
 <input type="submit">

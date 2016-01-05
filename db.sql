@@ -1,3 +1,8 @@
+-- obsluga w lini polecen:
+-- kasia:~$ psql przepisy
+-- przepisy=# \i Dokumenty/BazyDanych/db.sql        
+-- to wykonuje ten kod
+
 DROP TABLE IF EXISTS polaczenie;
 DROP TABLE IF EXISTS historia;
 DROP TABLE IF EXISTS przepisy;
@@ -9,6 +14,8 @@ CREATE TABLE uzytkownicy(
 			id  SERIAL PRIMARY KEY NOT NULL ,
 			nazwa varchar(256) NOT NULL
 			);
+
+INSERT INTO uzytkownicy(nazwa) VALUES ('kasia');
 
 CREATE TABLE produkty(
 			id  SERIAL PRIMARY KEY NOT NULL,
@@ -51,4 +58,6 @@ CREATE TABLE historia(
 			id_uzyt int4 REFERENCES uzytkownicy(id),
 			data timestamp
 			);
+
+INSERT INTO historia(zmiana) VALUES ('dodaj to to i to, no i nie zapomnij o tym');
 

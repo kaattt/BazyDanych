@@ -57,7 +57,7 @@ pg_close($dbconn)
        //else
        //  echo "Nie mozna sie polaczyc<br/>";
 
-$query = 'SELECT przepis FROM przepisy';
+$query = 'SELECT zmiana FROM historia';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
 while ($line = pg_fetch_row($result)) {
@@ -110,17 +110,6 @@ pg_close($dbconn)
 	
 </form>
 
-
-
-<form action = "edytuj.php">
-<h4>Kliknij poniżej, aby edytować</h4>
-	<input type="submit">
-</form>
-
-<form action = "historia.php">
-<h4>Kliknij poniżej, aby zobaczyć historię zmian tego przepisu</h4>
-	<input type="submit">
-</form>
 
 </fieldset>
 </body></html>

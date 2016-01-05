@@ -49,7 +49,7 @@
        else
          echo "Nie mozna sie polaczyc<br/>";
 
-$query = 'SELECT id, nazwa FROM produkty ORDER BY nazwa';
+$query = 'SELECT id_prod, nazwa FROM produkty ORDER BY nazwa';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
 while ($line = pg_fetch_row($result)) {

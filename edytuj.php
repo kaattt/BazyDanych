@@ -95,6 +95,9 @@ pg_close($dbconn)
 <input type="submit" onclick="alert('Dziękujemy za edycję przepisu!')" >
 
 </form>
+</br>
+<a href='wyswietlony.php'>Wróć</a>
+
 </fieldset>
 
 </body>

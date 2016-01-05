@@ -110,6 +110,7 @@ pg_close($dbconn)
 	
 </form>
 
+<a href='wyswietlony.php'>Wróć</a>
 
 </fieldset>
 </body></html>

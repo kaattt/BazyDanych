@@ -112,15 +112,11 @@ pg_close($dbconn)
 
 
 
-<form action = "edytuj.php">
-<h4>Kliknij poniżej, aby edytować</h4>
-	<input type="submit">
-</form>
+<a href = 'edytuj.php'>Kliknij, aby edytować</a></br>
 
-<form action = "historia.php">
-<h4>Kliknij poniżej, aby zobaczyć historię zmian tego przepisu</h4>
-	<input type="submit">
-</form>
+<a href = 'historia.php'>Kliknij, aby zobaczyć historię zmian tego przepisu</a></br>
+
+<a href = 'wyszukaj.php'>Wróć</a>
 
 </fieldset>
 </body></html>

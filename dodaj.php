@@ -71,10 +71,9 @@ pg_close($dbconn)
 
 </form>
 
-<input type="submit" onclick="alert('Dziękujemy za dodanie przepisu!')" >
+<input type="submit" onclick="alert('Dziękujemy za dodanie przepisu!')" ></br>
 
+<a href = 'index.html'>Wróć</a>
 
 </fieldset>
-
-
 </body></html>

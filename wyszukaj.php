@@ -78,6 +78,7 @@ pg_close($dbconn)
 <input type="submit">
 </form>
 
+<a href = 'index.html'>Wróć</a>
 
 </fieldset>
 </body></html>

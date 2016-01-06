@@ -19,8 +19,9 @@
        //  echo "Polaczono ...<br/>";
        //else
        //  echo "Nie mozna sie polaczyc<br/>";
+$skladnik1 = $_POST['skladniki'];
 
-$query = 'SELECT nazwa FROM przepisy';
+$query = 'SELECT prze.nazwa FROM przepisy prze, produkty pro, polaczenie p WHERE pro.id_prod= '. $skladnik1 . ' AND p.id_prod=pro.id_prod AND p.id_przep = prze.id_przep;';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 //$result = 0;
 
@@ -61,7 +62,7 @@ pg_close($dbconn)
        //else
        //  echo "Nie mozna sie polaczyc<br/>";
 
-$query = 'SELECT przepis FROM przepisy';
+$query = 'SELECT prze.przepis FROM przepisy prze, produkty pro, polaczenie p WHERE pro.id_prod= ' . $skladnik1 . ' AND p.id_prod=pro.id_prod AND p.id_przep = prze.id_przep; ';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 //$result = 0;
 
@@ -100,7 +101,7 @@ pg_close($dbconn)
        //else
        //  echo "Nie mozna sie polaczyc<br/>";
 
-$query = 'SELECT nazwa FROM uzytkownicy';
+$query = 'select u.nazwa from przepisy prze, produkty pro, polaczenie p, uzytkownicy u where pro.id_prod= '. $skladnik1 .' AND p.id_prod=pro.id_prod AND p.id_przep = prze.id_przep AND prze.id_uzyt = u.id_uzyt';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 //$result = 0;
 
@@ -111,6 +112,9 @@ if(!$result or pg_num_rows($result)==0){
     while ($line = pg_fetch_row($result)) {
    
         echo "<input type=\"text\" name=\"przepis\" size=\"25\" value= \"" . $line[0] .  "\" readonly=\"readonly\"/>";
+        echo "</br><a href='edytuj.php'>Kliknij, aby edytować</a></br>";
+        echo "<a href='historia.php'>Kliknij, aby zobaczyć historię zmian tego przepisu</a></br>";
+
       }
 }
 
@@ -123,11 +127,6 @@ pg_close($dbconn)
 ?>
 	
 </form>
-
-
-<a href='edytuj.php'>Kliknij, aby edytować</a></br>
-
-<a href='historia.php'>Kliknij, aby zobaczyć historię zmian tego przepisu</a></br>
 
 <a href='wyszukaj.php'>Wróć</a>
 

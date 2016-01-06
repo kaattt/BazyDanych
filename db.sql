@@ -15,7 +15,8 @@ CREATE TABLE uzytkownicy(
 			nazwa varchar(256) NOT NULL
 			);
 
-INSERT INTO uzytkownicy(nazwa) VALUES ('kasia');
+INSERT INTO uzytkownicy(nazwa) VALUES ('Kasia');
+INSERT INTO uzytkownicy(nazwa) VALUES ('Szymek');
 
 
 CREATE TABLE produkty(
@@ -43,8 +44,8 @@ CREATE TABLE przepisy(
 			data timestamp
 			);
 
-INSERT INTO przepisy (nazwa,przepis,data) VALUES ('ser z grzybami', 'dodaj grzyby do sera', '2015-12-30 22:15:00');
-INSERT INTO przepisy (nazwa,przepis,data) VALUES ('marchewka z groszkiem', 'dodaj marchewke do groszku', '2015-12-30 22:15:01');
+INSERT INTO przepisy (nazwa,przepis,data, id_uzyt) VALUES ('ser z grzybami', 'dodaj grzyby do sera', '2015-12-30 22:15:00', 1);
+INSERT INTO przepisy (nazwa,przepis,data, id_uzyt) VALUES ('marchewka z groszkiem', 'dodaj marchewke do groszku', '2015-12-30 22:15:01', 2);
 
 
 
@@ -75,7 +76,7 @@ CREATE TABLE historia(
 			data timestamp
 			);
 
-INSERT INTO historia (zmiana) VALUES ('dodaj to to i to, no i nie zapomnij o tym');
+INSERT INTO historia (zmiana, data) VALUES ('dodaj to to i to, no i nie zapomnij o tym', '2015-12-29 10:00:01');
 
 --------------------
 DROP FUNCTION IF EXISTS spr_stan_przed_insert() ;

@@ -76,7 +76,9 @@ CREATE TABLE historia(
 			data timestamp
 			);
 
-INSERT INTO historia (zmiana, data) VALUES ('dodaj to to i to, no i nie zapomnij o tym', '2015-12-29 10:00:01');
+INSERT INTO historia (zmiana, data, id_przep, id_uzyt) VALUES ('dodaj groszek do marchewki', '2015-12-29 10:00:01',2, 1);
+INSERT INTO historia (zmiana, data, id_przep, id_uzyt) VALUES ('dodaj ser do grzybów', '2015-12-29 10:00:01',1, 2);
+
 
 --------------------
 DROP FUNCTION IF EXISTS spr_stan_przed_insert() ;

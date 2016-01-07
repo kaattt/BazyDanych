@@ -12,6 +12,7 @@
 
 <?php //connection
 
+$skladnik1=$_POST['skladniki'];
         $con='host=localhost dbname=przepisy user=kasia password=tajne';
         $db=pg_connect($con) or die('Nie mozna nawiazac polaczenia: ' . pg_last_error());
 
@@ -20,7 +21,7 @@
        //else
        //  echo "Nie mozna sie polaczyc<br/>";
 
-$query = 'SELECT nazwa FROM przepisy';
+$query = 'SELECT prze.nazwa FROM przepisy prze, produkty pro, polaczenie p WHERE pro.id_prod= '. $skladnik1 . ' AND p.id_prod=pro.id_prod AND p.id_przep = prze.id_przep;';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
 while ($line = pg_fetch_row($result)) {
@@ -44,34 +45,28 @@ pg_close($dbconn)
 
 <form>
 
-
 <?php //connection
-
         $con='host=localhost dbname=przepisy user=kasia password=tajne';
         $db=pg_connect($con) or die('Nie mozna nawiazac polaczenia: ' . pg_last_error());
-
        //if($db)
        //  echo "Polaczono ...<br/>";
        //else
        //  echo "Nie mozna sie polaczyc<br/>";
-
-$query = 'SELECT przepis FROM przepisy';
+$query = 'SELECT prze.przepis FROM przepisy prze, produkty pro, polaczenie p WHERE pro.id_prod= ' . $skladnik1 . ' AND p.id_prod=pro.id_prod AND p.id_przep = prze.id_przep; ';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
-
-while ($line = pg_fetch_row($result)) {
-
-      	echo " <textarea name=\"tresc\" cols=\"100\" rows=\"20\" readonly=\"readonly\">" . $line[0] . "</textarea> ";
-
+//$result = 0;
+if(!$result or pg_num_rows($result)==0){
+        echo " <textarea name=\"tresc\" cols=\"100\" rows=\"20\" readonly=\"readonly\"> Brak przepisu </textarea> ";
+} else {
+      while ($line = pg_fetch_row($result)) {
+        echo " <textarea name=\"tresc\" cols=\"100\" rows=\"20\" readonly=\"readonly\">" . $line[0] . "</textarea> ";
+          }
 }
-
 // Zwolnienie zasobów wyniku zapytania
 pg_free_result($result);
-
 // Zamknięcie połączenia
 pg_close($dbconn)
-
 ?>
-
 	
 </form>
 

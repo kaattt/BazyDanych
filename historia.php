@@ -19,8 +19,9 @@
        //  echo "Polaczono ...<br/>";
        //else
        //  echo "Nie mozna sie polaczyc<br/>";
+$skladnik1 = $_POST['skladniki'];
 
-$query = 'SELECT nazwa FROM przepisy';
+$query =  'SELECT prze.nazwa FROM przepisy prze, produkty pro, polaczenie p WHERE pro.id_prod= '. $skladnik1 . ' AND p.id_prod=pro.id_prod AND p.id_przep = prze.id_przep;';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
 while ($line = pg_fetch_row($result)) {
@@ -57,7 +58,9 @@ pg_close($dbconn)
        //else
        //  echo "Nie mozna sie polaczyc<br/>";
 
-$query = 'SELECT zmiana FROM historia';
+$query = 'SELECT zmiana FROM historia h, produkty pro, polaczenie pol WHERE 
+  pro.id_prod='. $skladnik1 .' AND h.id_przep=pol.id_przep AND pro.id_prod=pol.id_prod ;';
+
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
 while ($line = pg_fetch_row($result)) {
@@ -92,7 +95,8 @@ pg_close($dbconn)
        //else
        //  echo "Nie mozna sie polaczyc<br/>";
 
-$query = 'SELECT nazwa FROM uzytkownicy';
+$query = 'SELECT u.nazwa FROM historia h, produkty pro, polaczenie p, uzytkownicy u WHERE
+ pro.id_prod= '. $skladnik1 .' AND h.id_uzyt = u.id_uzyt AND pro.id_prod=p.id_prod AND p.id_przep=h.id_przep ;';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
 while ($line = pg_fetch_row($result)) {

@@ -3,11 +3,11 @@
 -- przepisy=# \i Dokumenty/BazyDanych/db.sql        
 -- to wykonuje ten kod
 
-DROP TABLE IF EXISTS polaczenie;
-DROP TABLE IF EXISTS historia;
-DROP TABLE IF EXISTS przepisy;
-DROP TABLE IF EXISTS produkty;
-DROP TABLE IF EXISTS uzytkownicy;
+DROP TABLE polaczenie CASCADE;
+DROP TABLE historia CASCADE;
+DROP TABLE przepisy CASCADE;
+DROP TABLE produkty CASCADE;
+DROP TABLE uzytkownicy CASCADE;
 
 
 CREATE TABLE uzytkownicy(
@@ -81,7 +81,7 @@ INSERT INTO historia (zmiana, data, id_przep, id_uzyt) VALUES ('dodaj ser do grz
 
 
 --------------------
-DROP FUNCTION IF EXISTS spr_stan_przed_insert() ;
+DROP FUNCTION spr_stan_przed_insert() ;
 CREATE FUNCTION spr_stan_przed_insert() RETURNS TRIGGER AS '
 BEGIN
 	IF NEW.data < (SELECT data FROM historia WHERE id_przep=NEW.id_przep ) THEN 

@@ -2,6 +2,7 @@
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
+<title>Nazwa przepisu</title>
 </head>
 <body>
 <fieldset>
@@ -114,7 +115,10 @@ pg_close($dbconn)
 	
 </form>
 
-<a href='wyswietlony.php'>Wróć</a>
+<form action = "index.html">
+<button>Wróc do strony głównej</button>
+</form>
+<!--a href='wyswietlony.php'>Wróć</a-->
 
 </fieldset>
 </body></html>

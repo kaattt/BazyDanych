@@ -75,11 +75,16 @@ if (isset($_POST["skladniki"])){
   } else {
     while ($line = pg_fetch_row($result)) {
    
-        echo "<form/><input type=\"text\" name=\"przepis\" size=\"25\" value= \"" . $line[0] .  "\" readonly=\"readonly\"/></form>";
+        echo "<form/><input type=\"text\" name=\"przepis\" size=\"25\" value= \"" 
+              . $line[0] .  "\" readonly=\"readonly\"/></form>";
+
         echo"</br><form action=\"edytuj.php\" method=POST >";
-        echo "<button name=\"skladniki\"  value=\"" . $skladnik1 . "\">Kliknij, aby edytować</button></form>";
+        echo "<button name=\"skladniki\"  value=\"" . $skladnik1 . "\">
+              Kliknij, aby edytować</button></form>";
+
         echo"<form action=\"historia.php\" method=POST >";
-        echo "<button name=\"skladniki\"  value=\"" . $skladnik1 . "\">Kliknij, aby zobaczyć historię zmian tego przepisu</button></br></form>";
+        echo "<button name=\"skladniki\"  value=\"" . $skladnik1 . "\">
+              Kliknij, aby zobaczyć historię zmian tego przepisu</button></br></form>";
       }
   }
   // Zwolnienie zasobów wyniku zapytania

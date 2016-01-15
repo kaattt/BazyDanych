@@ -7,11 +7,13 @@
 <body>
 <fieldset>
 
-<h3>Nazwa przepisu:</h3>
 
-<form>
 
+<form action="poedycji.php" method=POST>
 <?php //connection
+
+
+echo "<h3>Nazwa przepisu:</h3>";
 
 $skladnik1=$_POST['skladniki'];
         $con='host=localhost dbname=przepisy user=kasia password=tajne';
@@ -27,18 +29,13 @@ $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error()
 
 while ($line = pg_fetch_row($result)) {
    
-        echo "<input type=\"text\" name=\"przepis\" size=\"50\" value= \"" . $line[0] .  "\" readonly=\"readonly\"/>";
-      
-
-}
+        echo "<input type=\"text\" name=\"nazwa\" size=\"50\" value= \"" . $line[0] .  "\" readonly=\"readonly\"/>";
+      }
 
 ?>
 	
-</form>
 
 <h3>Treść starego przepisu:</h3>
-
-<form>
 
 <?php 
 
@@ -57,34 +54,23 @@ pg_free_result($result);
 // Zamknięcie połączenia
 pg_close($db)
 ?>
-	
-</form>
 
 
 
 <h3>Treść nowego przepisu:</h3>
-
-<form action="dodaj.php">
 	<textarea name="tresc" cols="100" rows="20"></textarea>
-</form>
-
 
 <h4>Przepis edytował użytkownik:</h4>
+	<input type="text" name="uzytkownik" size="25"/>
 
-<form action="dodaj.php">
-	<input type="text" name="przepis" size="25"/>
-</form>
-
-
-<form action="index.html">
-	<input type="submit" onclick="alert('Dziękujemy za edycję przepisu!')" >
-</form>
-</br>
-<?php
-        echo"</br><form action=\"wyswietlony.php\" method=POST >";
-        echo "<button name=\"skladniki\"  value=\"" . $skladnik1 . "\">Wróć</button></form>";
-
+<?php    
+     echo "<button type=\"submit\" name=\"skladniki\"  value=\"" . $skladnik1 . "\">
+     		Wyślij</button>";
 ?>
+
+</br>
+
+</form>
 </fieldset>
 
 </body>

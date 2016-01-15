@@ -71,14 +71,16 @@ while ($line = pg_fetch_row($result)) {
 pg_free_result($result);
 
 // Zamknięcie połączenia
-pg_close($dbconn)
+pg_close($dbconn);
 ?>
 
 </select>
 <input type="submit">
 </form>
 
-<a href = 'index.html'>Wróć</a>
+<form action="index.html">
+        <button name="wroc">Wróć</button></br>
+</form>
 
 </fieldset>
 </body></html>

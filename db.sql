@@ -12,7 +12,7 @@ DROP TABLE uzytkownicy CASCADE;
 
 CREATE TABLE uzytkownicy(
 			id_uzyt SERIAL PRIMARY KEY NOT NULL ,
-			nazwa varchar(256) NOT NULL
+			nazwa varchar(256) NOT NULL UNIQUE
 			);
 
 INSERT INTO uzytkownicy(nazwa) VALUES ('Kasia');
@@ -40,7 +40,7 @@ CREATE TABLE przepisy(
 			nazwa varchar(256) NOT NULL,
 			przepis varchar(1024) NOT NULL,
 			id_uzyt int4,
-			FOREIGN KEY (id_uzyt) REFERENCES uzytkownicy(id_uzyt),
+			FOREIGN KEY (id_uzyt) REFERENCES uzytkownicy(id_uzyt) DEFERRABLE,
 			data timestamp
 			);
 
@@ -53,9 +53,9 @@ INSERT INTO przepisy (nazwa,przepis,data, id_uzyt) VALUES ('marchewka z groszkie
 CREATE TABLE polaczenie(
 			id_pol  SERIAL PRIMARY KEY NOT NULL ,
 			id_prod int4, 
-			FOREIGN KEY (id_prod) REFERENCES produkty(id_prod),		
+			FOREIGN KEY (id_prod) REFERENCES produkty(id_prod) DEFERRABLE,		
 			id_przep int4,
-			FOREIGN KEY (id_przep) REFERENCES przepisy(id_przep)	
+			FOREIGN KEY (id_przep) REFERENCES przepisy(id_przep) DEFERRABLE	
 
 			);
 
@@ -68,17 +68,16 @@ INSERT INTO polaczenie (id_prod, id_przep) VALUES (2 , 2);
 CREATE TABLE historia(
 			id_hist  SERIAL PRIMARY KEY NOT NULL ,
 			id_przep int4,
-			FOREIGN KEY (id_przep) REFERENCES przepisy(id_przep),					
+			FOREIGN KEY (id_przep) REFERENCES przepisy(id_przep) DEFERRABLE,					
 			zmiana varchar(1024),
 			UNIQUE (zmiana),
 			id_uzyt int4,
-			FOREIGN KEY (id_uzyt) REFERENCES uzytkownicy(id_uzyt),		
+			FOREIGN KEY (id_uzyt) REFERENCES uzytkownicy(id_uzyt) DEFERRABLE,		
 			data timestamp
 			);
 
 INSERT INTO historia (zmiana, data, id_przep, id_uzyt) VALUES ('dodaj groszek do marchewki', '2015-12-29 10:00:01',2, 1);
 INSERT INTO historia (zmiana, data, id_przep, id_uzyt) VALUES ('dodaj ser do grzybów', '2015-12-29 10:00:01',1, 2);
-
 
 --------------------
 DROP FUNCTION spr_stan_przed_insert() ;

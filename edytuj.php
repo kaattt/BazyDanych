@@ -55,7 +55,7 @@ if(!$result or pg_num_rows($result)==0){
 // Zwolnienie zasobów wyniku zapytania
 pg_free_result($result);
 // Zamknięcie połączenia
-pg_close($dbconn)
+pg_close($db)
 ?>
 	
 </form>
@@ -80,8 +80,11 @@ pg_close($dbconn)
 	<input type="submit" onclick="alert('Dziękujemy za edycję przepisu!')" >
 </form>
 </br>
-<a href='wyswietlony.php'>Wróć</a>
+<?php
+        echo"</br><form action=\"wyswietlony.php\" method=POST >";
+        echo "<button name=\"skladniki\"  value=\"" . $skladnik1 . "\">Wróć</button></form>";
 
+?>
 </fieldset>
 
 </body>

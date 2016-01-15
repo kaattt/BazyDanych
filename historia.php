@@ -36,7 +36,7 @@ while ($line = pg_fetch_row($result)) {
 pg_free_result($result);
 
 // Zamknięcie połączenia
-pg_close($dbconn)
+pg_close($db)
 
 ?>
 	
@@ -74,7 +74,7 @@ while ($line = pg_fetch_row($result)) {
 pg_free_result($result);
 
 // Zamknięcie połączenia
-pg_close($dbconn)
+pg_close($db)
 
 ?>
 
@@ -109,7 +109,7 @@ while ($line = pg_fetch_row($result)) {
 pg_free_result($result);
 
 // Zamknięcie połączenia
-pg_close($dbconn)
+pg_close($db)
 
 ?>
 	

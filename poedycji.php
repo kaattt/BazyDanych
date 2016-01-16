@@ -2,10 +2,36 @@
   "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pl">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Zgłoszenie edycji</title>
+  
+  <meta charset="UTF-8">
+  <title>Przepisy siostry Katarzyny</title>
+
+  <link rel="stylesheet" href="fontello.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic|Pacifico|Marck+Script|Crafty+Girls&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
+
 </head>
+
+
 <body>
+  
+
+  <div class="container">
+    <div class="header">
+        <a href="index.html"><h1>Przepisy siostry Katarzyny <i class="icon-birthday"></i></h1></a>
+        </div>
+    <div id="menu">
+      <ul class="menuList">
+        <li><a href="wyszukaj.php"><i class="icon-ok"></i>Wyszukaj przepis</a></li>
+        <li><a href="dodaj.php"><i class="icon-ok" ></i>Utwórz własny</a></li>
+      </ul>
+    </div>
+    <div id="main">
+      <img src="background.png">
+      <div class="title"></div>
+      <div class="tresc">
+
 <?php
 if (empty($_POST["uzytkownik"]) || 
       empty($_POST["tresc"])) {
@@ -78,6 +104,26 @@ pg_close($db);
 
 
 ?>
+
+      </div>
+      <div class="toplista">
+        <i class="icon-star-empty"></i> Toplista
+        <ul id="topPrzepisy">
+          <li>Naleśniki Marieci</li>
+          <li>Placek od Grażyny</li>
+          <li>Zupa z Gównem</li>
+          <li>Sałatka jeżynowa na słono</li>
+          <li>Sałatka jarzynowa na słodko</li>
+          <li>Kot w sosie własnym</li>
+          <li>Kotlet z psa (pomielony razem z budą)</li>
+          <li>All in One czyli mix z lodówki po świętach</li>
+        </ul>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+  </div>
+
+
 <form action = "index.html">
 <button>Wróc na stronę główną</button>
 </form>

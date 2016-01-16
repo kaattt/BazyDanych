@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html><head>
-<meta http-equiv="content-type" content="text/html" charset=UTF-8>
-<title>Wyszukaj przepis</title>
-</head>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>Przepisy siostry Katarzyny</title>
+
+    <link rel="stylesheet" href="fontello.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic|Pacifico|Marck+Script|Crafty+Girls&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
+
 <body>
-<fieldset>
+    <div class="container">
+        <div class="header">
+        <a href="index.html"><h1>Przepisy siostry Katarzyny <i class="icon-birthday"></i></h1></a>
+        </div>
+        <div id="menu">
+            <ul class="menuList">
+                <li><a href="wyszukaj.php"><i class="icon-ok"></i>Wyszukaj przepis</a></li>
+                <li><a href="dodaj.php"><i class="icon-ok" ></i>Utwórz własny</a></li>
+            </ul>
+        </div>
+        <div id="main">
+            <img src="background.png">
+            <div class="title"></div>
+            <div class="tresc">
+
+
 <h3>Jakie składniki masz w lodówce?</h3>
 <h5>aby wybrac więcej składników, przytrzymaj klawisz Ctrl</h5>
 
@@ -56,17 +78,6 @@ while ($line = pg_fetch_row($result)) {
 
 }
 
-#$dostepne_film = pg_query($db,'SELECT  FROM film ORDER BY tytul ;');
-#if(!$dostepne_film or pg_num_rows($dostepne_film)==0){
-#        echo 'Brak filmów';
-#} else {
-#        $dostepne_film = pg_fetch_all($dostepne_film);
-#        for ($i=0; $i<count($dostepne_film); $i++){
-#                print( '<a href="film.php?film='.$dostepne_film[$i]['id_film'] .'">'.  $dostepne_film[$i]['tytul'] .'</a><br/>' );
-#        }
-#        echo'</center>';
-#}
-
 // Zwolnienie zasobów wyniku zapytania
 pg_free_result($result);
 
@@ -78,9 +89,24 @@ pg_close($dbconn);
 <input type="submit">
 </form>
 
-<form action="index.html">
-        <button name="wroc">Wróć</button></br>
-</form>
+            </div>
+            <div class="toplista">
+                <i class="icon-star-empty"></i> Toplista
+                <ul id="topPrzepisy">
+                    <li>Naleśniki Marieci</li>
+                    <li>Placek od Grażyny</li>
+                    <li>Zupa z Gównem</li>
+                    <li>Sałatka jeżynowa na słono</li>
+                    <li>Sałatka jarzynowa na słodko</li>
+                    <li>Kot w sosie własnym</li>
+                    <li>Kotlet z psa (pomielony razem z budą)</li>
+                    <li>All in One czyli mix z lodówki po świętach</li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+
 
 </fieldset>
 </body></html>

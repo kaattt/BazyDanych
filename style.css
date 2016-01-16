@@ -1,0 +1,112 @@
+/*Czcionki:
+font-family: 'Lato', sans-serif;
+font-family: 'Pacifico', cursive;
+font-family: 'Marck Script', cursive;
+font-family: 'Crafty Girls', cursive;
+*/
+body {
+	background: url('../img/restaurant_icons.png');
+	margin: 0;
+	padding: 0;
+	font-family: 'Lato', sans-serif;
+}
+
+.container {
+	width: 1000px;
+	margin: auto;
+}
+
+a { 
+	text-decoration: none; 
+	color: inherit;
+}
+
+.header h1 {
+	background: linear-gradient(to top, rgba(39, 123, 158,0.7) 0%, rgba(35, 69, 165, 0.7) 50%);
+	padding: 20px;
+	font-family: 'Pacifico', cursive;
+	font-weight: normal;
+	font-size: 40px;
+	color: white;
+	border-radius: 10px 10px 0 0;
+	border-bottom: 2px solid rgb(0,30,255);
+	box-shadow: 0px 0px 10px black;
+}
+
+#menu {
+	float: left;
+    background: rgba(0, 0, 0,0.5);
+    box-sizing: border-box;
+    width: 250px;
+    border: 1px dashed black;
+    box-shadow: 1px 1px 10px;
+}
+
+#main {
+	float: left;
+    box-sizing: border-box;
+    position: relative;
+}
+
+ul.menuList {
+	list-style-type: none;
+    padding-left: 10px;
+    color: white;
+    font-size: 24px;
+    font-family: 'Marck Script', cursive;
+}
+
+ul.menuList li:hover {
+	color: #2A2AEF;
+	cursor: pointer;
+}
+
+#main img {
+	position: absolute;
+	z-index: -1;
+	top: -45px;
+    left: -9px;
+}
+
+.title {
+	position: absolute;
+    top: 21px;
+    left: 60px;
+    width: 670px;
+    font-size: 32px;
+    transform: rotate(-2deg);
+    font-family: 'Marck Script', cursive;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.tresc {
+	position: absolute;
+    width: 670px;
+    top: 124px;
+    left: 72px;
+    font-size: 26px;
+    font-family: 'Marck Script', cursive;
+}
+
+.toplista {
+	float: left;
+    position: absolute;
+    top: 119px;
+    left: -250px;
+    width: 250px;
+    box-sizing: border-box;
+    background: rgba(3, 97, 197, 0.67);
+    border: 1px dashed black;
+    box-shadow: 1px 1px 10px;
+    padding: 15px;
+    font-family: 'Crafty Girls', cursive;
+    font-size: 28px;
+    color: white;;
+}
+
+ul#topPrzepisy {
+	list-style-type: decimal;
+	margin: 0;
+	font-size: 20px;
+}

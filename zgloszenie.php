@@ -2,10 +2,36 @@
   "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pl">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Zgłoszenie</title>
+
+  <meta charset="UTF-8">
+  <title>Przepisy siostry Katarzyny</title>
+
+  <link rel="stylesheet" href="fontello.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic|Pacifico|Marck+Script|Crafty+Girls&
+    subset=latin,latin-ext' rel='stylesheet' type='text/css' />
+
 </head>
 <body>
+  
+
+  <div class="container">
+    <div class="header">
+      <a href="index.html"><h1>Przepisy siostry Katarzyny <i class="icon-birthday"></i></h1></a>
+    </div>
+    <div id="menu">
+      <ul class="menuList">
+        <li><a href="wyszukaj.php"><i class="icon-ok"></i>Wyszukaj przepis</a></li>
+        <li><a href="dodaj.php"><i class="icon-ok" ></i>Utwórz własny</a></li>
+      </ul>
+    </div>
+    <div id="main">
+      <img src="background.png">
+      <div class="title"></div>
+      <div class="tresc">
+  
+
 <?php
   if (isset($_POST["submit"])) {
 
@@ -17,8 +43,8 @@
       echo "<p style=\"color:red\">Musisz wypełnić wszystkie pola!</p>";
 
       echo "<form action = \"dodaj.php\">
-<button>Wróc do formularza</button>
-</form>";
+            <button>Wróc do formularza</button>
+            </form>";
 
     } else {
 ?>
@@ -31,25 +57,10 @@
 
       $con='host=localhost dbname=przepisy user=kasia password=tajne';
       $db=pg_connect($con) or die('Nie mozna nawiazac polaczenia: ' . pg_last_error());
-//perform the insert using pg_query
-//      $result = pg_query($db, "INSERT INTO przepisy(nazwa, przepis) 
-//                  VALUES(\'" . $nazwa . "\', \'" . $tresc . "\');");
-      
-
-
 
  // INSERT INTO produkty(nazwa) VALUES('jajko');
 
 $query1 = "INSERT INTO uzytkownicy(nazwa) VALUES('$uzytkownik_filtr')";
-$query2 = "INSERT into przepisy (nazwa,przepis,id_uzyt) values (
-  '$nazwa_filtr', 
-  '$tresc_filtr',
-  (select id_uzyt from uzytkownicy where nazwa='$uzytkownik_filtr'))";
-$query3 = "INSERT INTO polaczenie(id_prod, id_przep) VALUES(
-  (SELECT id_prod FROM produkty where nazwa = '$skladniki_filtr'), 
-  (SELECT id_przep FROM przepisy where nazwa = '$nazwa_filtr'))";
-//$query4 = "INSERT INTO produkty(nazwa) VALUES((SELECT nazwa FROM produkty WHERE id_prod=
-//  '$skladniki_filtr'))";
 
 $result1 = pg_query($query1) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
  while ($line = pg_fetch_row($result1)) {
@@ -59,6 +70,11 @@ $result1 = pg_query($query1) or die('Nieprawidłowe zapytanie: ' . pg_last_error
         else echo "Nie OK";
       }
 
+$query2 = "INSERT into przepisy (nazwa,przepis,id_uzyt) values (
+  '$nazwa_filtr', 
+  '$tresc_filtr',
+  (select id_uzyt from uzytkownicy where nazwa='$uzytkownik_filtr'))";
+
 $result2 = pg_query($query2) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
  while ($line = pg_fetch_row($result2)) {
    
@@ -66,6 +82,10 @@ $result2 = pg_query($query2) or die('Nieprawidłowe zapytanie: ' . pg_last_error
       if($result2) echo "OK";
         else echo "Nie OK";
       }
+
+$query3 = "INSERT INTO polaczenie(id_prod, id_przep) VALUES(
+  (SELECT id_prod FROM produkty where nazwa = '$skladniki_filtr'), 
+  (SELECT id_przep FROM przepisy where nazwa = '$nazwa_filtr'))";
 
 $result3 = pg_query($query3) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
  while ($line = pg_fetch_row($result3)) {
@@ -75,20 +95,11 @@ $result3 = pg_query($query3) or die('Nieprawidłowe zapytanie: ' . pg_last_error
         else echo "Nie OK";
       }
       
-//$result4 = pg_query($query4) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
-// while ($line = pg_fetch_row($result4)) {
-   
-//           $result4 = pg_query($query4) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
- //     if($result4) echo "OK";
- //       else echo "Nie OK";
- //     }
- // Zwolnienie zasobów wyniku zapytania
+
 pg_free_result($result1);
 pg_free_result($result2);
 pg_free_result($result3);
-//pg_free_result($result4);
-// Zamknięcie połączenia
-pg_close($db); 
+
 ?>
 
       <h3>Dziękujemy za Dodanie przepisu!</h3>
@@ -100,17 +111,7 @@ pg_close($db);
       <li>Treść przepisu: <b><?= trim($_POST["tresc"]); ?></b></li>
 
 <?php 
-
-      $con='host=localhost dbname=przepisy user=kasia password=tajne';
-      $db=pg_connect($con) or die('Nie mozna nawiazac polaczenia: ' . pg_last_error());
-
-//       if($db)
-//         echo "Polaczono ...</br>";
-//       else
-//         echo "Nie mozna sie polaczyc</br>";
-
 $produkt = $_POST["skladniki"];
-
 $query = 'SELECT nazwa FROM produkty WHERE id_prod='. $produkt.'';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
@@ -120,16 +121,9 @@ while ($line = pg_fetch_row($result)) {
 //        echo "<option value= " . $line[0] . " > " . $line[1] . "</option>\n"; 
 }
 
-
-// Zwolnienie zasobów wyniku zapytania
 pg_free_result($result);
-// Zamknięcie połączenia
-pg_close($db)
-
- 
-?>
-
-    
+pg_close($db);
+?>   
       </ul>
 
 <?php
@@ -137,9 +131,7 @@ pg_close($db)
     }
 
   } else {
-
     // Jeśli użytkownik dostał się na tę stronę w sposób inny niż przez formularz
-
     // zostaje przekierowany do formularza zgłoszenia
 
     header("Location: index.html");
@@ -147,9 +139,24 @@ pg_close($db)
   }
 
 ?>
-<form action = "index.html">
-<button>Wróc na stronę główną</button>
-</form>
-</body>
 
+      </div>
+      <div class="toplista">
+        <i class="icon-star-empty"></i> Toplista
+        <ul id="topPrzepisy">
+          <li>Naleśniki Marieci</li>
+          <li>Placek od Grażyny</li>
+          <li>Zupa z Gównem</li>
+          <li>Sałatka jeżynowa na słono</li>
+          <li>Sałatka jarzynowa na słodko</li>
+          <li>Kot w sosie własnym</li>
+          <li>Kotlet z psa (pomielony razem z budą)</li>
+          <li>All in One czyli mix z lodówki po świętach</li>
+        </ul>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+  </div>
+
+</body>
 </html>

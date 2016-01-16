@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Edytuj przepis</title>
+
+	<meta charset="UTF-8">
+	<title>Przepisy siostry Katarzyny</title>
+
+	<link rel="stylesheet" href="fontello.css" />
+	<link rel="stylesheet" href="style.css" />
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic|Pacifico|Marck+Script|Crafty+Girls&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
+
 </head>
 <body>
-<fieldset>
 
 
+
+	<div class="container">
+		<div class="header">
+      	<a href="index.html"><h1>Przepisy siostry Katarzyny <i class="icon-birthday"></i></h1></a>
+      	</div>
+		<div id="menu">
+			<ul class="menuList">
+				<li><a href="wyszukaj.php"><i class="icon-ok"></i>Wyszukaj przepis</a></li>
+				<li><a href="dodaj.php"><i class="icon-ok" ></i>Utwórz własny</a></li>
+			</ul>
+		</div>
+		<div id="main">
+			<img src="background.png">
+			<div class="title">
 
 <form action="poedycji.php" method=POST>
 <?php //connection
-
-
-echo "<h3>Nazwa przepisu:</h3>";
 
 $skladnik1=$_POST['skladniki'];
         $con='host=localhost dbname=przepisy user=kasia password=tajne';
@@ -29,12 +46,14 @@ $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error()
 
 while ($line = pg_fetch_row($result)) {
    
-        echo "<input type=\"text\" name=\"nazwa\" size=\"50\" value= \"" . $line[0] .  "\" readonly=\"readonly\"/>";
+        echo  $line[0] ;
+        echo '<input type="hidden" value="'. $line[0].'" name="nazwa" />';
       }
 
 ?>
 	
-
+</div>
+			<div class="tresc">
 <h3>Treść starego przepisu:</h3>
 
 <?php 
@@ -43,10 +62,10 @@ $query = 'SELECT prze.przepis FROM przepisy prze, produkty pro, polaczenie p WHE
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
 if(!$result or pg_num_rows($result)==0){
-        echo " <textarea name=\"tresc\" cols=\"100\" rows=\"20\" readonly=\"readonly\"> Brak przepisu </textarea> ";
+        echo "Brak przepisu";
 } else {
       while ($line = pg_fetch_row($result)) {
-        echo " <textarea name=\"tresc\" cols=\"100\" rows=\"20\" readonly=\"readonly\">" . $line[0] . "</textarea> ";
+        echo  $line[0];
           }
 }
 // Zwolnienie zasobów wyniku zapytania
@@ -56,9 +75,8 @@ pg_close($db)
 ?>
 
 
-
 <h3>Treść nowego przepisu:</h3>
-	<textarea name="tresc" cols="100" rows="20"></textarea>
+	<textarea name="tresc" cols="50" rows="10"></textarea>
 
 <h4>Przepis edytował użytkownik:</h4>
 	<input type="text" name="uzytkownik" size="25"/>
@@ -71,7 +89,26 @@ pg_close($db)
 </br>
 
 </form>
-</fieldset>
+
+</div>
+			<div class="toplista">
+				<i class="icon-star-empty"></i> Toplista
+				<ul id="topPrzepisy">
+					<li>Naleśniki Marieci</li>
+					<li>Placek od Grażyny</li>
+					<li>Zupa z Gównem</li>
+					<li>Sałatka jeżynowa na słono</li>
+					<li>Sałatka jarzynowa na słodko</li>
+					<li>Kot w sosie własnym</li>
+					<li>Kotlet z psa (pomielony razem z budą)</li>
+					<li>All in One czyli mix z lodówki po świętach</li>
+				</ul>
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+
+
 
 </body>
 </html>

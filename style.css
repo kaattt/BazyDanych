@@ -5,7 +5,7 @@ font-family: 'Marck Script', cursive;
 font-family: 'Crafty Girls', cursive;
 */
 body {
-	background: url('../img/restaurant_icons.png');
+	background: url('restaurant_icons.png');
 	margin: 0;
 	padding: 0;
 	font-family: 'Lato', sans-serif;

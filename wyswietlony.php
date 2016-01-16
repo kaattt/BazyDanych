@@ -16,7 +16,7 @@
 
   <div class="container">
     <div class="header">
-        <a href="index.html"><h1>Przepisy siostry Katarzyny <i class="icon-birthday"></i></h1></a>
+        <a href="index.php"><h1>Przepisy siostry Katarzyny <i class="icon-birthday"></i></h1></a>
         </div>
     <div id="menu">
       <ul class="menuList">
@@ -77,7 +77,7 @@ if (isset($_POST["skladniki"])){
   </form>
 
 
-  <?php //connection
+  <?php 
        
   $query = 'SELECT u.nazwa from przepisy prze, produkty pro, polaczenie p, uzytkownicy u WHERE pro.id_prod= '. $skladnik1 .' AND p.id_prod=pro.id_prod AND p.id_przep = prze.id_przep AND prze.id_uzyt = u.id_uzyt';
   $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
@@ -89,19 +89,20 @@ if (isset($_POST["skladniki"])){
    
         echo "<h5>Autor: ". $line[0]." </h5>" ;
 
-        echo"</br><form action=\"edytuj.php\" method=POST >";
+        
+      }
+
+      echo"</br><form action=\"edytuj.php\" method=POST >";
         echo "<button name=\"skladniki\"  value=\"" . $skladnik1 . "\">
               Kliknij, aby edytować</button></form>";
 
         echo"<form action=\"historia.php\" method=POST >";
         echo "<button name=\"skladniki\"  value=\"" . $skladnik1 . "\">
               Kliknij, aby zobaczyć historię zmian tego przepisu</button></br></form>";
-      }
   }
   // Zwolnienie zasobów wyniku zapytania
   pg_free_result($result);
-  // Zamknięcie połączenia
-  pg_close($db);
+  
 } else {
 
  echo "<p style=\"color:red\">Wybierz chociaż jeden składnik</p>";
@@ -119,14 +120,23 @@ if (isset($_POST["skladniki"])){
       <div class="toplista">
         <i class="icon-star-empty"></i> Toplista
         <ul id="topPrzepisy">
-          <li>Naleśniki Marieci</li>
-          <li>Placek od Grażyny</li>
-          <li>Zupa z Gównem</li>
-          <li>Sałatka jeżynowa na słono</li>
-          <li>Sałatka jarzynowa na słodko</li>
-          <li>Kot w sosie własnym</li>
-          <li>Kotlet z psa (pomielony razem z budą)</li>
-          <li>All in One czyli mix z lodówki po świętach</li>
+<?php
+$query = 'SELECT nazwa FROM przepisy limit 10 ';
+$result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
+
+  if(!$result or pg_num_rows($result)==0){
+        echo "Brak przepisu ";
+  } else {
+      while ($line = pg_fetch_row($result)) {
+        echo "<li>" .$line[0] . "</li> ";
+          }
+  }
+
+ pg_free_result($result);
+  // Zamknięcie połączenia
+ pg_close($db);
+
+?>
         </ul>
       </div>
     </div>

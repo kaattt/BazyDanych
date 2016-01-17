@@ -108,7 +108,7 @@ i uzytkownicy%ROWTYPE;
 
 BEGIN
 
-for i.nazwa in SELECT nazwa FROM uzytkownicy loop
+for i in SELECT nazwa FROM uzytkownicy loop
 	if NEW.nazwa=i.nazwa then 
 		return null;
 	end if;
@@ -131,7 +131,7 @@ i przepisy%ROWTYPE;
 
 BEGIN
 
-for i.nazwa in SELECT nazwa FROM przepisy loop
+for i in SELECT nazwa FROM przepisy loop
 	if NEW.nazwa=i.nazwa then 
 		return null;
 	end if;

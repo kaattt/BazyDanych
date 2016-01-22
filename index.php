@@ -3,7 +3,7 @@
 <head>
 
 	<meta charset="UTF-8">
-	<title>Przepisy siostry Katarzyny</title>
+	<title>Przepisy Katarzyny</title>
 
 	<link rel="stylesheet" href="fontello.css" />
 	<link rel="stylesheet" href="style.css" />
@@ -16,7 +16,7 @@
 
 	<div class="container">
 		<div class="header">
-      	<a href="index.php"><h1>Przepisy siostry Katarzyny <i class="icon-birthday"></i></h1></a>
+      	<a href="index.php"><h1>Przepisy Katarzyny <i class="icon-birthday"></i></h1></a>
       	</div>
 		<div id="menu">
 			<ul class="menuList">

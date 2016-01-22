@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>Przepisy siostry Katarzyny</title>
+    <title>Przepisy Katarzyny</title>
 
     <link rel="stylesheet" href="fontello.css" />
     <link rel="stylesheet" href="style.css" />
@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <div class="header">
-        <a href="index.php"><h1>Przepisy siostry Katarzyny <i class="icon-birthday"></i></h1></a>
+        <a href="index.php"><h1>Przepisy Katarzyny <i class="icon-birthday"></i></h1></a>
         </div>
         <div id="menu">
             <ul class="menuList">
@@ -27,8 +27,7 @@
             <div class="tresc">
 
 
-<h3>Jakie składniki masz w lodówce?</h3>
-<h5>aby wybrac więcej składników, przytrzymaj klawisz Ctrl</h5>
+<h3>Co masz w lodówce?</h3>
 
 <form action="wyswietlony.php" method=POST>
 <select name="skladniki" size="10" multiple="multiple">

@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Przepisy siostry Katarzyny</title>
+  <title>Przepisy Katarzyny</title>
 
   <link rel="stylesheet" href="fontello.css" />
   <link rel="stylesheet" href="style.css" />
@@ -14,7 +14,7 @@
 
 <div class="container">
     <div class="header">
-      <a href="index.php"><h1>Przepisy siostry Katarzyny <i class="icon-birthday"></i></h1></a>
+      <a href="index.php"><h1>Przepisy Katarzyny <i class="icon-birthday"></i></h1></a>
     </div>
     <div id="menu">
       <ul class="menuList">
@@ -41,8 +41,7 @@
 
   <textarea name="tresc" cols="50" rows="10"></textarea>
 
-  <h4>Jakich składników, użyłeś w swoim przepisie?</h4>
-  <h5>aby wybrac więcej składników, przytrzymaj klawisz Ctrl</h5>
+  <h4>Co jest głównym skladnikiem przepisu?</h4>
 
   <select name="skladniki" size="10" multiple="multiple">
 
@@ -53,7 +52,7 @@
 //         echo "Polaczono ...</br>";
 //       else
 //         echo "Nie mozna sie polaczyc</br>";
-$query = 'SELECT id_prod, nazwa FROM produkty ORDER BY nazwa';
+$query = 'SELECT * FROM produkty ORDER BY nazwa';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 while ($line = pg_fetch_row($result)) {
    

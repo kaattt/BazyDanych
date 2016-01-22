@@ -80,6 +80,19 @@ INSERT INTO historia (zmiana, data, id_przep, id_uzyt) VALUES ('dodaj groszek do
 INSERT INTO historia (zmiana, data, id_przep, id_uzyt) VALUES ('dodaj ser do grzybów', '2015-12-29 10:00:01',1, 2);
 
 --------------------
+
+DROP  FUNCTION update_modified_column()	;
+CREATE  FUNCTION update_modified_column() RETURNS TRIGGER AS '
+BEGIN
+    NEW.data = now();
+    RETURN NEW;	
+END;
+' language 'plpgsql';
+
+CREATE TRIGGER update_customer_modtime BEFORE UPDATE ON przepisy FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
+
+--------------------
+
 DROP FUNCTION spr_stan_przed_update() ;
 CREATE FUNCTION spr_stan_przed_update() RETURNS TRIGGER AS '
 BEGIN
@@ -102,21 +115,21 @@ CREATE TRIGGER t_spr_stan_przed_update BEFORE UPDATE ON przepisy FOR EACH ROW EX
 DROP FUNCTION spr_stan_przed_uzyt() ;
 CREATE FUNCTION spr_stan_przed_uzyt() RETURNS TRIGGER AS '
 
-DECLARE 
-
-i uzytkownicy%ROWTYPE;
-
-BEGIN
-
-for i.nazwa in SELECT nazwa FROM uzytkownicy loop
-	if NEW.nazwa=i.nazwa then 
-		return null;
-	end if;
-end loop;
-return new;
-END;
-' LANGUAGE 'plpgsql';
-
+ DECLARE 
+ 
+ i uzytkownicy%ROWTYPE;
+ 
+ BEGIN
+ 
+ for i.nazwa in SELECT nazwa FROM uzytkownicy loop
+ 	if NEW.nazwa=i.nazwa then 
+ 		return null;
+ 	end if;
+ end loop;
+ return new;
+ END;
+ 'LANGUAGE 'plpgsql';
+ 
 CREATE TRIGGER t_spr_stan_przed_uzyt BEFORE INSERT OR update ON uzytkownicy FOR EACH ROW EXECUTE PROCEDURE spr_stan_przed_uzyt();
 
 
@@ -142,12 +155,5 @@ END;
 
 CREATE TRIGGER t_spr_stan_przed_przepis BEFORE INSERT ON przepisy FOR EACH ROW EXECUTE PROCEDURE spr_stan_przed_przepis();
 
-DROP  FUNCTION update_modified_column()	;
-CREATE  FUNCTION update_modified_column() RETURNS TRIGGER AS $$
-BEGIN
-    NEW.data = now();
-    RETURN NEW;	
-END;
-$$ language 'plpgsql';
+-----------------------
 
-CREATE TRIGGER update_customer_modtime BEFORE UPDATE ON przepisy FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();

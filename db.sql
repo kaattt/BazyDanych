@@ -33,6 +33,21 @@ INSERT INTO produkty (nazwa) VALUES ('szynka');
 INSERT INTO produkty (nazwa) VALUES ('śmietana');
 INSERT INTO produkty (nazwa) VALUES ('jogurt');
 INSERT INTO produkty (nazwa) VALUES ('grzyby');
+INSERT INTO produkty (nazwa) VALUES ('kukurydza');
+INSERT INTO produkty (nazwa) VALUES ('mięso');
+INSERT INTO produkty (nazwa) VALUES ('sałata');
+INSERT INTO produkty (nazwa) VALUES ('ketchup');
+INSERT INTO produkty (nazwa) VALUES ('cynamon');
+INSERT INTO produkty (nazwa) VALUES ('mąka');
+INSERT INTO produkty (nazwa) VALUES ('kasza');
+INSERT INTO produkty (nazwa) VALUES ('jabłko');
+INSERT INTO produkty (nazwa) VALUES ('banan');
+INSERT INTO produkty (nazwa) VALUES ('rzodkiewka');
+INSERT INTO produkty (nazwa) VALUES ('masło');
+INSERT INTO produkty (nazwa) VALUES ('olej');
+INSERT INTO produkty (nazwa) VALUES ('ogórek');
+INSERT INTO produkty (nazwa) VALUES ('cebula');
+
 
 
 CREATE TABLE przepisy(
@@ -91,13 +106,15 @@ END;
 
 CREATE TRIGGER update_customer_modtime BEFORE UPDATE ON przepisy FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
 
---------------------
+-------------------- usuać trigger t_spr_stan_przed_update, zrobić po stronie php 
 
 DROP FUNCTION spr_stan_przed_update() ;
 CREATE FUNCTION spr_stan_przed_update() RETURNS TRIGGER AS '
 BEGIN
-	IF NEW.data < (SELECT data FROM historia WHERE id_przep=NEW.id_przep order by data desc limit 1 ) THEN 
-		RAISE NOTICE ''Operacja nie zostala wykonana. Nie edytujesz najnowszego przepisu'';
+	IF NEW.data < (SELECT data FROM historia WHERE id_przep=NEW.id_przep order by 
+		data desc limit 1 ) THEN 
+		RAISE NOTICE ''Operacja nie zostala wykonana. Nie edytujesz najnowszego 
+		przepisu'';
 		RETURN NULL;
 	ELSE
 		INSERT INTO historia (id_przep, zmiana, id_uzyt, data)
@@ -107,7 +124,7 @@ END IF;
 END;
 ' LANGUAGE 'plpgsql';
 
---DROP TRIGGER IF EXISTS t_spr_stan_przed_insert ON przepisy ;
+
 CREATE TRIGGER t_spr_stan_przed_update BEFORE UPDATE ON przepisy FOR EACH ROW EXECUTE PROCEDURE spr_stan_przed_update();
 
 ----------------------
@@ -115,11 +132,11 @@ CREATE TRIGGER t_spr_stan_przed_update BEFORE UPDATE ON przepisy FOR EACH ROW EX
 DROP FUNCTION spr_stan_przed_uzyt() ;
 CREATE FUNCTION spr_stan_przed_uzyt() RETURNS TRIGGER AS '
 
- DECLARE 
+DECLARE 
  
  i uzytkownicy%ROWTYPE;
  
- BEGIN
+BEGIN
  
  for i.nazwa in SELECT nazwa FROM uzytkownicy loop
  	if NEW.nazwa=i.nazwa then 

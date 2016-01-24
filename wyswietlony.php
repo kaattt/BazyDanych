@@ -62,7 +62,9 @@ if (isset($_POST["skladniki"])){
   <form>
   <?php 
 
-  $query = 'SELECT prze.przepis FROM przepisy prze, produkty pro, polaczenie p WHERE pro.id_prod= ' . $skladnik1 . ' AND p.id_prod=pro.id_prod AND p.id_przep = prze.id_przep; ';
+  $query = 'SELECT prze.przepis FROM przepisy prze, produkty pro, polaczenie p 
+            WHERE pro.id_prod= ' . $skladnik1 . ' 
+            AND p.id_prod=pro.id_prod AND p.id_przep = prze.id_przep; ';
   $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
   if(!$result or pg_num_rows($result)==0){

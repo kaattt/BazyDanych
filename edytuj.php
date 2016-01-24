@@ -44,10 +44,27 @@ $skladnik1=$_POST['skladniki'];
 $query = 'SELECT prze.nazwa FROM przepisy prze, produkty pro, polaczenie p WHERE pro.id_prod= '. $skladnik1 . ' AND p.id_prod=pro.id_prod AND p.id_przep = prze.id_przep;';
 $result = pg_query($query) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
 
+function udate($format, $utimestamp = null)
+{
+    if (is_null($utimestamp))
+        $utimestamp = microtime(true);
+
+    $timestamp = floor($utimestamp);
+    $milliseconds = round(($utimestamp - $timestamp) * 1000000);
+
+    return date(preg_replace('`(?<!\\\\)u`', $milliseconds, $format), $timestamp);
+}
+
+$data = udate('Y-m-d H:i:s.u'); // 19:40:56.78128
+
+
+//echo $data;
+
 while ($line = pg_fetch_row($result)) {
    
         echo  $line[0] ;
         echo '<input type="hidden" value="'. $line[0].'" name="nazwa" />';
+        echo '<input type="hidden" value="'. $data .'" name="data" />';
       }
 
 ?>

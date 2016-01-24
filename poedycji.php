@@ -43,9 +43,7 @@ if (empty($_POST["uzytkownik"]) ||
       echo "<button name=\"skladniki\"  value=\"" . $skladnik1 . "\">Wróć</button></form>";    
 
     } else {
-?>
-
-      <?php $uzytkownik_filtr = addslashes(trim($_POST['uzytkownik'])); 
+ $uzytkownik_filtr = addslashes(trim($_POST['uzytkownik'])); 
             $tresc_filtr = addslashes(trim($_POST['tresc'])); 
             $nazwa_filtr = addslashes(trim($_POST['nazwa']));
   
@@ -57,15 +55,36 @@ if (empty($_POST["uzytkownik"]) ||
       
 
  // INSERT INTO produkty(nazwa) VALUES('jajko');
+$skladnik1=$_POST['skladniki'];
+
+
+$data=$_POST['data'];
+
+$query0 ="SELECT data FROM przepisy WHERE id_przep=
+              (SELECT id_przep FROM polaczenie WHERE id_prod = ". $skladnik1 .")
+                order by data desc limit 1 ";
+
+$result0 = pg_query($query0) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
+ while ($line = pg_fetch_row($result0)) {
+       $data_przepis = $line[0] ;
+
+           $result1 = pg_query($query0) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
+      //if($result0) echo "OK";
+      //  else echo "Nie OK";
+      }
+
+
+if($data_przepis<$data){
 
 $query1 = "INSERT INTO uzytkownicy(nazwa) VALUES('$uzytkownik_filtr')";
 $query2 = "UPDATE przepisy SET przepis = '$tresc_filtr',
   id_uzyt = (select id_uzyt from uzytkownicy where nazwa='$uzytkownik_filtr')
   WHERE nazwa = '$nazwa_filtr'";
 
+
+
 $result1 = pg_query($query1) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
  while ($line = pg_fetch_row($result1)) {
-   
            $result1 = pg_query($query1) or die('Nieprawidłowe zapytanie: ' . pg_last_error());
       if($result1) echo "OK";
         else echo "Nie OK";
@@ -82,6 +101,7 @@ $result2 = pg_query($query2) or die('Nieprawidłowe zapytanie: ' . pg_last_error
       
 
  // Zwolnienie zasobów wyniku zapytania
+pg_free_result($result0);
 pg_free_result($result1);
 pg_free_result($result2);
  
@@ -97,8 +117,9 @@ pg_free_result($result2);
       <li>Treść przepisu: <b><?= trim($_POST["tresc"]); ?></b></li>
       </ul>
 
-<?php
 
+<?php
+} else echo "Niestety nie udało Ci się edytować najnowszego przepisu" ;
     }
 
 

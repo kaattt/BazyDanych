@@ -106,7 +106,7 @@ END;
 
 CREATE TRIGGER update_customer_modtime BEFORE UPDATE ON przepisy FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
 
--------------------- usuać trigger t_spr_stan_przed_update, zrobić po stronie php 
+-------------------- 
 
 DROP FUNCTION spr_stan_przed_update() ;
 CREATE FUNCTION spr_stan_przed_update() RETURNS TRIGGER AS '
